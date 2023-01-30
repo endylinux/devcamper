@@ -1,0 +1,7 @@
+
+
+#Intellij
+.idea/
+
+node_modules/
+config/config.env
