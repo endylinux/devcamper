@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "c5909b7e-982c-4c14-9c9f-2afd26157874",
+		"_postman_id": "31f68d45-fb35-4982-a745-d0ad6af8cf4d",
 		"name": "DevCamper API",
 		"description": "Backend API for the DevCamper application to manage boocamps, courses, reviews, users and authentication.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25679474"
+		"_exporter_id": "19097806"
 	},
 	"item": [
 		{
@@ -169,6 +169,61 @@
 					"response": []
 				},
 				{
+					"name": "Get All Bootcamps In Radius",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/bootcamps/radius/02118/10",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bootcamps",
+								"radius",
+								"02118",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Photo",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"careers\": [\n        \"Web Development\",\n        \"UI/UX\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/bootcamps/5d725a1b7b292f5f8ceff788/photo",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bootcamps",
+								"5d725a1b7b292f5f8ceff788",
+								"photo"
+							]
+						},
+						"description": "Route to upload a bootcamp photo"
+					},
+					"response": []
+				},
+				{
 					"name": "Upload Photo to Bootcamp",
 					"request": {
 						"auth": {
@@ -216,36 +271,18 @@
 			"name": "Courses",
 			"item": [
 				{
-					"name": "Create Course",
+					"name": "Get All Courses",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{TOKEN}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "{{URL}}/api/v1/bootcamps/63df014c099c7fa66d577e4c/courses",
+							"raw": "{{URL}}/api/v1/courses",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"bootcamps",
-								"63df014c099c7fa66d577e4c",
 								"courses"
 							]
 						}
@@ -253,26 +290,32 @@
 					"response": []
 				},
 				{
-					"name": "Update Course",
+					"name": "Get Courses for Bootcamp",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{TOKEN}}",
-									"type": "string"
-								}
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/bootcamps/5d713995b721c3bb38c1f5d0/courses",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bootcamps",
+								"5d713995b721c3bb38c1f5d0",
+								"courses"
 							]
 						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
+						"description": "Get the specific courses for Bootcamp"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Course",
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "{{URL}}/api/v1/courses/5d725ce8c4ded7bcb480eaa3",
 							"host": [
@@ -284,33 +327,94 @@
 								"courses",
 								"5d725ce8c4ded7bcb480eaa3"
 							]
-						}
+						},
+						"description": "Get a single Course with ID."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Bootcamp Course",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Full Stack Web Development\",\n    \"description\": \"In this course you will learn full stack web development, first learning all about the frontend with HTML/CSS/JS/Vue and then the backend with Node.js/Express/MongoDB\",\n    \"weeks\": 12,\n    \"tuition\": 10000,\n    \"minimumSkill\": \"intermediate\",\n    \"scholarhipsAvailable\": true,\n    \"bootcamp\": \"5d713995b721c3bb38c1f5d0\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/bootcamps/5d725a1b7b292f5f8ceff788/courses",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bootcamps",
+								"5d725a1b7b292f5f8ceff788",
+								"courses"
+							]
+						},
+						"description": "Create a course for a specific Bootcamp"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Course",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tuition\": 13000,\n    \"minimumSkill\": \"advanced\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/courses/5d725c84c4ded7bcb480eaa0",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"courses",
+								"5d725c84c4ded7bcb480eaa0"
+							]
+						},
+						"description": "Update a single Course"
 					},
 					"response": []
 				},
 				{
 					"name": "Delete Course",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{TOKEN}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
 								"value": "application/json",
+								"description": "JSON Type",
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
-							"raw": "{{URL}}/api/v1/courses/5d725ce8c4ded7bcb480eaa3",
+							"raw": "{{URL}}/api/v1/courses/5d725c84c4ded7bcb480eaa0",
 							"host": [
 								"{{URL}}"
 							],
@@ -318,9 +422,10 @@
 								"api",
 								"v1",
 								"courses",
-								"5d725ce8c4ded7bcb480eaa3"
+								"5d725c84c4ded7bcb480eaa0"
 							]
-						}
+						},
+						"description": "Delete a single course"
 					},
 					"response": []
 				}
